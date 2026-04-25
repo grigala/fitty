@@ -3,4 +3,44 @@ name = "fitty"
 version = "0.1.0"
 edition = "2024"
 
+[lib]
+name = "fitty"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "fitty-bin"
+path = "src/main.rs"
+
+[features]
+dev = []
+
 [dependencies]
+eframe = { version = "0.33", default-features = false, features = ["default_fonts", "glow"] }
+egui = "0.33"
+egui_plot = "0.34"
+walkers = "0.52"
+fitparser = "0.6"
+chrono = "0.4"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+rfd = "0.14"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+    "Window", "Document", "HtmlCanvasElement",
+    "Blob", "Url", "HtmlAnchorElement",
+] }
+rfd = "0.14"
+
+[dependencies.winit]
+version = "0.30.13"
+features = ["default"]
+
+[profile.release]
+opt-level = 2
+
+[profile.release.package."*"]
+opt-level = 3

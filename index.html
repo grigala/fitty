@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fitty</title>
+    <link data-trunk rel="icon" href="assets/favicon.ico">
+    <link data-trunk rel="copy-file" href="assets/sw.js"/>
+    <link data-trunk rel="copy-file" href="assets/manifest.json"/>
+    <link data-trunk rel="rust" data-wasm-opt="2" data-target-name="fitty"/>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<canvas id="fitty"></canvas>
+<script>
+    if ('serviceWorker' in navigator && window.location.hash !== "#dev") {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('sw.js');
+        });
+    }
+</script>
+</body>
+</html>
