@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fitty</title>
+    <link rel="icon" href="https://grigala.github.io/fitty/favicon-42b32db8e8b9ab35.ico" integrity="sha384-jNytDLvpiA7vwoS9fVTFIBFk4uEa9jPnplT9K/Qe0D/i/ZRsZqbFKYjbUlEOdT6H"/>
+    
+    
+    
+<script type="module">
+import init, * as bindings from 'https://grigala.github.io/fitty/fitty-47a008f07838e0e9.js';
+const wasm = await init({ module_or_path: 'https://grigala.github.io/fitty/fitty-47a008f07838e0e9_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        canvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+<link rel="modulepreload" href="https://grigala.github.io/fitty/fitty-47a008f07838e0e9.js" crossorigin="anonymous" integrity="sha384-DgdHEYCTEiJF6iygeYlk0i3LdLh/bPipljPeZd9fg2QU6yXsX+UfOdep+g8rhCVA"><link rel="preload" href="https://grigala.github.io/fitty/fitty-47a008f07838e0e9_bg.wasm" crossorigin="anonymous" integrity="sha384-WplV7kv+qp8IB9N2e9dVVGjka+GPGrDz1nXjZCxitUc7K2CPKtZDS1iCIZGlP99+" as="fetch" type="application/wasm"></head>
+<body>
+<canvas id="fitty"></canvas>
+<script>
+    if ('serviceWorker' in navigator && window.location.hash !== "#dev") {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('sw.js');
+        });
+    }
+</script>
+</body>
+</html>
